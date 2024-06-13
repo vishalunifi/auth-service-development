@@ -1,0 +1,25 @@
+{
+    "app": {
+        "name": "test-service"
+    },
+    "log": {
+        "level": "info"
+    },
+    "api": {
+        "ports": {
+            "external": 8080,
+            "internal": 8081
+        }
+    },
+    "database": {
+        "client": "postgresql",
+        "pool": {
+            "min": 2,
+            "max": 10
+        },
+        "migrations": {
+            "tableName": "knex_migrations"
+        }
+    },
+    "jwtSecret": "vishal"
+}

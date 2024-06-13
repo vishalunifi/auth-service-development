@@ -1,0 +1,6 @@
+{
+    "dev": true,
+    "log": {
+        "level": "error"
+    }
+}

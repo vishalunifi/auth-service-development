@@ -1,0 +1,11 @@
+{
+    "log": {
+        "level": "error"
+    },
+    "database": {
+        "pool": {
+            "min": 2,
+            "max": 10
+        }
+    }
+}
