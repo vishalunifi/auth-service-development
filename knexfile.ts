@@ -2,14 +2,13 @@ import type { Knex } from "knex";
 
 // Update with your config settings.
 const username = encodeURIComponent('auth-user');
-const password = encodeURIComponent(`|?'k"Jy2lif3Nq'i`);
 const host = '34.44.93.120';
 const database = 'auth-db';
 const config: { [key: string]: Knex.Config } = {
   development: {
     client: "postgresql",
     // connection: "postgresql://postgres:postgres@localhost:5432/test_db?schema=public",
-    connection: `postgresql://${username}:${password}@${host}:5432/${database}?schema=public`,
+    connection: `postgresql://${username}:12345678@${host}:5432/${database}?schema=public`,
 
     pool: {
       min: 2,

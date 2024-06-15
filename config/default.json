@@ -17,6 +17,8 @@
             "min": 2,
             "max": 10
         },
+        "connection": "postgresql://auth-user:12345678@34.44.93.120/auth-db?schema=public",
+
         "migrations": {
             "tableName": "knex_migrations"
         }

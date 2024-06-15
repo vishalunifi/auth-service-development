@@ -1,30 +1,41 @@
+import { create } from './../dal/dal';
 import { Context } from 'koa';
+import * as testDAL from "../dal/dal";
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
 import config from 'config';
 import { registerSchema, loginSchema, updateEmailSchema, resetPasswordSchema } from '../utils/validators';
 import User from '../models/User';
 import { IRegisterRequest, ILoginRequest, IUpdateEmailRequest, IResetPasswordRequest } from '../interfaces';
-
+const DB_CONFIG: Object = config.get('database');
 const jwtSecret = config.get<string>('jwtSecret');
+export const get = async(ctx:Context)=>{
+  ctx.body = "get from Vishal";
+};
+
+export const getUsers = async (ctx: Context)=>{
+  const Users = await User.query();
+  ctx.body = Users;
+}
 
 export const register = async (ctx: Context) => {
+  console.log(DB_CONFIG);
   const { firstName, lastName, dob, mail, password, confirmPassword } = ctx.request.body as IRegisterRequest;
 
   const { error } = registerSchema.validate({ firstName, lastName, dob, mail, password, confirmPassword });
   if (error) {
     ctx.status = 400;
-    ctx.body = { error: error.details[0].message, "registration": "registration mein kuch gadbad hai brooooooooooo!" };
+    ctx.body = { error: error.details[0].message };
     return;
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
-  const user = await User.query().insert({
-    firstName,
-    lastName,
-    dob,
-    mail,
-    password: hashedPassword
+  const user = await testDAL.create({
+    "firstName": firstName,
+    "lastName": lastName,
+    "dob": dob,
+    "mail": mail,
+    "password": hashedPassword
   });
 
   ctx.status = 201;
@@ -41,7 +52,7 @@ export const login = async (ctx: Context) => {
     return;
   }
 
-  const user = await User.query().findOne({ mail });
+  const user = await testDAL.get(mail );
   if (!user || !(await bcrypt.compare(password, user.password))) {
     ctx.status = 400;
     ctx.body = { error: 'Invalid email or password' };
