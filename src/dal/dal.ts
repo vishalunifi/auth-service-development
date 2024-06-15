@@ -16,6 +16,9 @@ export const list = async () => {
     return await User
         .query()
 }
+export const GetAll = async () =>{
+    return await User.query();
+}
 
 export const get = async (id: string) => {
     const sqlRes = await User

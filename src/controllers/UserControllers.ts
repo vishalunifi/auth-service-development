@@ -14,7 +14,7 @@ export const get = async(ctx:Context)=>{
 };
 
 export const getUsers = async (ctx: Context)=>{
-  const Users = await User.query();
+  const Users = await testDAL.GetAll();
   ctx.body = Users;
 }
 
@@ -42,26 +42,26 @@ export const register = async (ctx: Context) => {
   ctx.body = user;
 };
 
-export const login = async (ctx: Context) => {
-  const { mail, password } = ctx.request.body as ILoginRequest;
+// export const login = async (ctx: Context) => {
+//   const { mail, password } = ctx.request.body as ILoginRequest;
 
-  const { error } = loginSchema.validate({ mail, password });
-  if (error) {
-    ctx.status = 400;
-    ctx.body = { error: error.details[0].message };
-    return;
-  }
+//   const { error } = loginSchema.validate({ mail, password });
+//   if (error) {
+//     ctx.status = 400;
+//     ctx.body = { error: error.details[0].message };
+//     return;
+//   }
 
-  const user = await testDAL.get(mail );
-  if (!user || !(await bcrypt.compare(password, user.password))) {
-    ctx.status = 400;
-    ctx.body = { error: 'Invalid email or password' };
-    return;
-  }
+//   const user = await testDAL.get(mail );
+//   if (!user || !(await bcrypt.compare(password, user.password))) {
+//     ctx.status = 400;
+//     ctx.body = { error: 'Invalid email or password' };
+//     return;
+//   }
 
-  const token = jwt.sign({ id: user.id, mail: user.mail }, jwtSecret);
-  ctx.body = { token };
-};
+//   const token = jwt.sign({ id: user.id, mail: user.mail }, jwtSecret);
+//   ctx.body = { token };
+// };
 
 export const updateEmail = async (ctx: Context) => {
   const { id } = ctx.state.user;
