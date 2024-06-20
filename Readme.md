@@ -1,4 +1,4 @@
-# TEST Micro Service
+# Auth Micro Service 
 
 ## Folder Structure
 
@@ -70,6 +70,6 @@
 
 - Clone the repo on your local system.
 - npm install
-- npx tsc
-- node dist/index.js
+- npm run build
+- npm run start
 
