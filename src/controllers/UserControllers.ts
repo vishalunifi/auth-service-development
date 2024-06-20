@@ -106,7 +106,7 @@ export const updateEmail = async (ctx: Context) => {
   }
 
   try {
-    const updatedUser = await testDAL.updateUserByMail(id,{mail});
+    const updatedUser = await testDAL.update(id,{mail});
     if (!updatedUser) {
       ctx.status = 404;
       ctx.body = { error: 'User not found' };

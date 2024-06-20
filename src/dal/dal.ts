@@ -56,13 +56,7 @@ export const update = async (id: string, fields: Object) => {
         .query()
         .patchAndFetchById(id, fields)
 }
-export const updateUserByMail = async (id: string, fields: Object) => {
-    return await User
-        .query()
-        .patchAndFetchById(id, fields)
-}
-// await User.query().patchAndFetchById(id, { mail })
-// User.query().patchAndFetchById(id, { password: hashedPassword })
+
 export const del = async (id: string) => {
     return await User
         .query()
