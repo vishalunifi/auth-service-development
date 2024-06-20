@@ -32,6 +32,18 @@ export const get = async (id: string) => {
         return null
     }
 }
+export const getByMail = async (mail:string) => {
+    const sqlRes = await User
+        .query()
+        .where({ mail })
+
+    if ((sqlRes) && (sqlRes.length > 0)) {
+        return sqlRes[0]
+    }
+    else {
+        return null
+    }
+}
 
 export const create = async (details: Object) => {
     return await User
@@ -42,9 +54,15 @@ export const create = async (details: Object) => {
 export const update = async (id: string, fields: Object) => {
     return await User
         .query()
-        .updateAndFetchById(id, fields)
+        .patchAndFetchById(id, fields)
 }
-
+export const updateUserByMail = async (id: string, fields: Object) => {
+    return await User
+        .query()
+        .patchAndFetchById(id, fields)
+}
+// await User.query().patchAndFetchById(id, { mail })
+// User.query().patchAndFetchById(id, { password: hashedPassword })
 export const del = async (id: string) => {
     return await User
         .query()
