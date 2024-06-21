@@ -39,14 +39,14 @@ function bindRoute(route: RouteDefinition, router: any) {
     args.push(async (ctx: any) => {
         const data = await handler(ctx)
 
-        if (typeof data === 'object' && data !== null && data.__override === true) {
-            ctx.body = _.omit(data, '__override')
-        } else {
-            ctx.body = {
-                error: false,
-                data,
-            }
-        }
+        // if (typeof data === 'object' && data !== null && data.__override === true) {
+        //     ctx.body = _.omit(data, '__override')
+        // } else if(typeof data ==='object') {
+        //     ctx.body = {
+        //         error: false,
+        //         data,
+        //     }
+        // }
     })
     switch (route.method) {
         case 'GET':

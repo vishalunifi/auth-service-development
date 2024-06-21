@@ -19,7 +19,7 @@ export const getUsers = async (ctx: Context)=>{
 }
 
 export const register = async (ctx: Context) => {
-  console.log(DB_CONFIG);
+  // console.log(DB_CONFIG);
   const { firstName, lastName, dob, mail, password, confirmPassword } = ctx.request.body as IRegisterRequest;
 
   const { error } = registerSchema.validate({ firstName, lastName, dob, mail, password, confirmPassword });
@@ -41,14 +41,14 @@ export const register = async (ctx: Context) => {
   ctx.status = 201;
   ctx.body = user;
 };
-type UserLogin= {
-  id:number,
-  password: string,
-  mail: string
-}
-function hello(a:string){
-  console.log("");
-}
+// type UserLogin= {
+//   id:number,
+//   password: string,
+//   mail: string
+// }
+// function hello(a:string){
+//   console.log("");
+// }
 
 export const login = async (ctx: Context) => {
   const { mail, password } = ctx.request.body as ILoginRequest;
@@ -64,7 +64,7 @@ export const login = async (ctx: Context) => {
   if (!user || !(await bcrypt.compare(password, user.password))) {
     ctx.status = 400;
     ctx.body = { error: 'Invalid email or password' };
-    return;
+        return;
   }
 
   const token = jwt.sign({ id: user.id, mail: user.mail }, jwtSecret);
