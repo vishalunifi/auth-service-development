@@ -3,6 +3,8 @@ import Koa from "koa"
 import Router from "koa-router"
 import bodyParser from "koa-bodyparser"
 import AppError from "../errors/AppError"
+// Swagger
+import swaggerRouter from "../../swagger";
 // Other
 import _ from "lodash"
 import config from "config"
@@ -106,7 +108,9 @@ function bindRoutes(routes: RouteDefinition[], port: unknown) {
     })
 
     app.use(router.routes())
-    app.use(router.allowedMethods())
+    app.use(router.allowedMethods());
+    app.use(swaggerRouter.routes());
+    app.use(swaggerRouter.allowedMethods());
 
     app.listen(port, () => {
         console.log(`API server listening on port ${port}`)
