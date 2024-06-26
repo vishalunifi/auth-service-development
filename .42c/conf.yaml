@@ -1,0 +1,3 @@
+apis:
+  src/swagger/swagger.json:
+    alias: user-management-api
