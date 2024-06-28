@@ -111,8 +111,6 @@ function bindRoutes(routes: RouteDefinition[], port: unknown) {
 
     app.use(router.routes())
     app.use(router.allowedMethods());
-    // app.use(swaggerRouter.routes());
-    // app.use(swaggerRouter.allowedMethods());
     setupSwagger(app);
 
     app.listen(port, () => {

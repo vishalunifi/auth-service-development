@@ -11,7 +11,7 @@
       }
     ],
     "paths": {
-      "/users": {
+      "/users/getAll": {
         "get": {
           "summary": "Get all users",
           "responses": {
@@ -40,7 +40,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "$ref": "#/components/schemas/Register"
                 }
               }
             }
@@ -94,6 +94,11 @@
       "/users/email": {
         "put": {
           "summary": "Update user email",
+          "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
           "requestBody": {
             "description": "Email update details",
             "required": true,
@@ -131,6 +136,11 @@
       "/users/reset-password": {
         "put": {
           "summary": "Reset user password",
+          "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
           "requestBody": {
             "description": "Password reset details",
             "required": true,
@@ -167,6 +177,13 @@
       }
     },
     "components": {
+      "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
       "schemas": {
         "User": {
           "type": "object",
@@ -177,6 +194,18 @@
             "dob": { "type": "string", "format": "date" },
             "mail": { "type": "string" },
             "password": { "type": "string" }
+          }
+        },
+        "Register": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "integer" },
+            "firstName": { "type": "string" },
+            "lastName": { "type": "string" },
+            "dob": { "type": "string", "format": "date" },
+            "mail": { "type": "string" },
+            "password": { "type": "string" },
+            "confirmPassword":{"type":"string"}
           }
         },
         "UpdateEmail": {
@@ -195,6 +224,11 @@
           "required": ["password", "confirmPassword"]
         }
       }
-    }
+    },
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ]
   }
   
